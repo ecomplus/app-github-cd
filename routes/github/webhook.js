@@ -3,7 +3,7 @@
 const POST = (id, meta, body, respond) => {
   // not using GitHub webhooks
   // nothing to do
-  respond(1)
+  respond(id)
 }
 
 module.exports = {

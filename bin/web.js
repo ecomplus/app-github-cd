@@ -44,29 +44,31 @@ ecomAuth.then(appSdk => {
   const middleware = (id, meta, body, respond, req, res, resource, verb, endpoint) => {
     // function called before endpoints
     // authentications and other prerequisites when necessary
-    if (resource.startsWith('ecom')) {
-      // requires store ID
-      let storeId = req.headers['x-store-id']
-      if (typeof storeId === 'string') {
-        storeId = parseInt(storeId, 10)
-      }
-      if (typeof storeId !== 'number' || isNaN(storeId) || storeId < 0) {
-        // invalid ID string
-        respond({}, null, 403, 191, 'Undefined or invalid Store ID')
-      } else {
-        if (verb !== 'GET' && process.env.NODE_ENV === 'production') {
-          // check if request comes from E-Com Plus servers
-          if (ecomServerIps.indexOf(req.headers['x-real-ip']) === -1) {
-            respond({}, null, 403, 192, 'Who are you? Unauthorized IP address')
-            return
-          }
-        }
-        // pass to endpoint
-        endpoint(id, meta, body, respond, storeId, appSdk)
-      }
-    } else {
+    if (resource.startsWith('github')) {
       // bypass to GitHub app endpoints
       endpoint(id, meta, body, respond)
+      return
+    }
+
+    // E-Com Plus app endpoints
+    // requires store ID
+    let storeId = req.headers['x-store-id']
+    if (typeof storeId === 'string') {
+      storeId = parseInt(storeId, 10)
+    }
+    if (typeof storeId !== 'number' || isNaN(storeId) || storeId < 0) {
+      // invalid ID string
+      respond({}, null, 403, 191, 'Undefined or invalid Store ID')
+    } else {
+      if (verb !== 'GET' && process.env.NODE_ENV === 'production') {
+        // check if request comes from E-Com Plus servers
+        if (ecomServerIps.indexOf(req.headers['x-real-ip']) === -1) {
+          respond({}, null, 403, 192, 'Who are you? Unauthorized IP address')
+          return
+        }
+      }
+      // pass to endpoint
+      endpoint(id, meta, body, respond, storeId, appSdk)
     }
   }
 
