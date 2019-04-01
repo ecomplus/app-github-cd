@@ -33,5 +33,12 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "dependencies": {
+    "@octokit/app": "^2.2.2",
+    "@octokit/request": "^2.4.2",
+    "console-files": "^2.2.0",
+    "ecomplus-app-sdk": "^1.9.6",
+    "rest-auto-router": "^3.6.13"
   }
 }
