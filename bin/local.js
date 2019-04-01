@@ -26,3 +26,8 @@ ecomAuth.catch(err => {
     process.exit(1)
   }, 1000)
 })
+
+if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS === true) {
+  // list all GitHub app installations from API
+  // trigger deploy every day at 03:00
+}
