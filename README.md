@@ -16,3 +16,13 @@ Variable              | Value
 `ECOM_AUTH_DB`        | `~/app/db.sqlite`
 `SCHEDULED_DEPLOYS`   | `true`
 `APP_BASE_URI`        | `https://app.ecomplus.biz/api/v1`
+
+## Production server
+
+Published at https://github.ecomplus.biz
+
+### Continuous deployment
+
+When app version is **production ready**,
+[create a new release](https://github.com/ecomclub/app-github-cd/releases)
+to run automatic deploy from `master` branch.
