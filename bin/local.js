@@ -18,6 +18,8 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
         logger.error(err)
       }
     })
+    // debug
+    logger.log('Stores setup (procedures) configured')
   })
 
   ecomAuth.catch(err => {
