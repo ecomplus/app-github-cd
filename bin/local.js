@@ -30,18 +30,19 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
     }, 1000)
   })
 
-  let scheduledDeploy = () => {
-    scheduledDeploy = async () => {
-      logger.log('--> Scheduled deploy')
-      // list all GitHub app installations from API
-      // https://github.com/octokit/app.js#authenticating-as-an-app
-      const request = require('@octokit/request')
-      // import App instance
-      const app = require('./../lib/GitHub/App')
+  const scheduledDeploy = () => {
+    logger.log('--> Scheduled deploy')
+    // list all GitHub app installations from API
+    // https://github.com/octokit/app.js#authenticating-as-an-app
+    const request = require('@octokit/request')
+    // import App instance
+    const app = require('./../lib/GitHub/App')
 
-      // chached authentication token
-      const jwt = app.getSignedJsonWebToken()
-      logger.log(jwt)
+    // chached authentication token
+    const jwt = app.getSignedJsonWebToken()
+    logger.log(jwt)
+
+    ;(async function apiRequest () {
       // https://developer.github.com/v3/apps/#find-installations
       const { data } = await request('GET /app/installations', {
         headers: {
@@ -56,7 +57,7 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
           //
         })
       }
-    }
+    }())
   }
 
   // debug
