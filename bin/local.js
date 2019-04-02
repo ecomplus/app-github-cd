@@ -46,6 +46,7 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
         accept: 'application/vnd.github.machine-man-preview+json'
       }
     })
+    logger.log(data)
 
     if (Array.isArray(data)) {
       data.forEach(installation => {
@@ -57,4 +58,6 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
   // trigger deploy every day at 03:00
   // https://www.npmjs.com/package/node-schedule
   require('node-schedule').scheduleJob('0 0 3 * *', scheduledDeploy)
+  // debug
+  scheduledDeploy()
 }
