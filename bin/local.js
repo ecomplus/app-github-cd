@@ -30,30 +30,32 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
     }, 1000)
   })
 
-  const scheduledDeploy = async () => {
-    logger.log('--> Scheduled deploy')
-    // list all GitHub app installations from API
-    // https://github.com/octokit/app.js#authenticating-as-an-app
-    const request = require('@octokit/request')
-    // import App instance
-    const app = require('./../lib/GitHub/App')
+  let scheduledDeploy = () => {
+    scheduledDeploy = async () => {
+      logger.log('--> Scheduled deploy')
+      // list all GitHub app installations from API
+      // https://github.com/octokit/app.js#authenticating-as-an-app
+      const request = require('@octokit/request')
+      // import App instance
+      const app = require('./../lib/GitHub/App')
 
-    // chached authentication token
-    const jwt = app.getSignedJsonWebToken()
-    logger.log(jwt)
-    // https://developer.github.com/v3/apps/#find-installations
-    const { data } = await request('GET /app/installations', {
-      headers: {
-        authorization: `Bearer ${jwt}`,
-        accept: 'application/vnd.github.machine-man-preview+json'
-      }
-    })
-    logger.log(data)
-
-    if (Array.isArray(data)) {
-      data.forEach(installation => {
-        //
+      // chached authentication token
+      const jwt = app.getSignedJsonWebToken()
+      logger.log(jwt)
+      // https://developer.github.com/v3/apps/#find-installations
+      const { data } = await request('GET /app/installations', {
+        headers: {
+          authorization: `Bearer ${jwt}`,
+          accept: 'application/vnd.github.machine-man-preview+json'
+        }
       })
+      logger.log(data)
+
+      if (Array.isArray(data)) {
+        data.forEach(installation => {
+          //
+        })
+      }
     }
   }
 
