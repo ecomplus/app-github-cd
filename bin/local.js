@@ -40,6 +40,7 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
 
     // chached authentication token
     const jwt = app.getSignedJsonWebToken()
+    logger.log(jwt)
     // https://developer.github.com/v3/apps/#find-installations
     const { data } = await request('GET /app/installations', {
       headers: {
