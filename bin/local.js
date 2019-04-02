@@ -37,10 +37,8 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
     const request = require('@octokit/request')
     // import App instance
     const app = require('./../lib/GitHub/App')
-
     // chached authentication token
     const jwt = app.getSignedJsonWebToken()
-    logger.log(jwt)
 
     ;(async function apiRequest () {
       // https://developer.github.com/v3/apps/#find-installations
