@@ -31,6 +31,7 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
   })
 
   const scheduledDeploy = async () => {
+    logger.log('--> Scheduled deploy')
     // list all GitHub app installations from API
     // https://github.com/octokit/app.js#authenticating-as-an-app
     const request = require('@octokit/request')
@@ -55,9 +56,11 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
     }
   }
 
+  // debug
+  logger.log('Start scheduled deploy')
+  scheduledDeploy()
+
   // trigger deploy every day at 03:00
   // https://www.npmjs.com/package/node-schedule
   require('node-schedule').scheduleJob('0 0 3 * *', scheduledDeploy)
-  // debug
-  scheduledDeploy()
 }
