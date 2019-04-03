@@ -32,18 +32,18 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
 
   // import trigger deploy function
   const triggerDeploy = require('./../lib/GitHub/TriggerDeploy')
+  // GitHub APIs client
+  const request = require('@octokit/request')
+  // import App instance
+  const app = require('./../lib/GitHub/App')
 
   const scheduledDeploy = () => {
     logger.log('--> Scheduled deploy')
-    // list all GitHub app installations from API
-    // https://github.com/octokit/app.js#authenticating-as-an-app
-    const request = require('@octokit/request')
-    // import App instance
-    const app = require('./../lib/GitHub/App')
-    // chached authentication token
+    // cached authentication token
     const jwt = app.getSignedJsonWebToken()
 
     ;(async function listInstallations () {
+      // list all GitHub app installations from API
       // https://developer.github.com/v3/apps/#find-installations
       const { data } = await request('GET /app/installations', {
         headers: {
