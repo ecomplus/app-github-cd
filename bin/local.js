@@ -56,9 +56,11 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
           let installation = data[i]
           // authenticate as installation
           // https://github.com/octokit/app.js#authenticating-as-an-installation
+          logger.log(i)
           const token = await app.getInstallationAccessToken({
             installationId: installation.id
           })
+          logger.log(token)
           // then list installation repositories
           // https://developer.github.com/v3/apps/installations/#list-repositories
           const res = await request('GET /installation/repositories', {
