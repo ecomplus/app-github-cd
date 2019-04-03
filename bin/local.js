@@ -51,18 +51,18 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
           accept: 'application/vnd.github.machine-man-preview+json'
         }
       })
-      logger.log(data)
+      // logger.log(data)
 
       if (data) {
         for (let i = 0; i < data.length; i++) {
           let installation = data[i]
           // authenticate as installation
           // https://github.com/octokit/app.js#authenticating-as-an-installation
-          logger.log(installation)
+          // logger.log(installation)
           const token = await app.getInstallationAccessToken({
             installationId: installation.id
           })
-          logger.log(token)
+          // logger.log(token)
           // then list installation repositories
           // https://developer.github.com/v3/apps/installations/#list-repositories
           const res = await request('GET /installation/repositories', {
@@ -74,7 +74,7 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
 
           // trigger deploy for each repository
           let repos = res.data.repositories
-          logger.log(repos)
+          // logger.log(repos)
           for (let i = 0; i < repos.length; i++) {
             let owner = repos[i].owner.login
             let repo = repos[i].name
