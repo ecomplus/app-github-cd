@@ -30,7 +30,7 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
     }, 1000)
   })
 
-  // import trigger deploy async function
+  // import trigger deploy function
   const triggerDeploy = require('./../lib/GitHub/TriggerDeploy')
 
   const scheduledDeploy = () => {
