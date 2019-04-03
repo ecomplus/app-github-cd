@@ -49,8 +49,10 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
     }).then(({ data }) => {
       logger.log(data)
       if (data) {
+        logger.log(1)
         // import trigger deploy async function
         const triggerDeploy = require('./../lib/GitHub/TriggerDeploy')
+        logger.log(2)
 
         ;(async function loop () {
           for (let i = 0; i < data.length; i++) {
