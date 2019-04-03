@@ -55,6 +55,7 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
           let installation = data[i]
           // authenticate as installation
           // https://github.com/octokit/app.js#authenticating-as-an-installation
+          logger.log(installation)
           const token = await app.getInstallationAccessToken({
             installationId: installation.id
           })
