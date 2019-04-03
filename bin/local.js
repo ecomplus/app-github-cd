@@ -77,7 +77,7 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
             let owner = repos[i].owner.login
             let repo = repos[i].name
             let content = null
-            triggerDeploy(installation, owner, repo, content, token)
+            await triggerDeploy(installation, owner, repo, content, token)
           }
         }
       }
