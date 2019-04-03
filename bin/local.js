@@ -49,6 +49,7 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
         }
       })
       const triggerDeploy = require('./../lib/GitHub/TriggerDeploy')
+      logger.log(data)
 
       if (data) {
         for (let i = 0; i < data.length; i++) {
