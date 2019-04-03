@@ -17,6 +17,10 @@ Variable              | Value
 `SCHEDULED_DEPLOYS`   | `true`
 `APP_BASE_URI`        | `https://app.ecomplus.biz/api/v1`
 
+## GitHub App
+
+https://github.com/apps/e-com-plus-storefront
+
 ## Production server
 
 Published at https://github.ecomplus.biz
