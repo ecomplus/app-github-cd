@@ -48,17 +48,13 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
           accept: 'application/vnd.github.machine-man-preview+json'
         }
       })
-      logger.log(data)
-      logger.log(typeof data)
-      logger.log(data.length)
       const triggerDeploy = require('./../lib/GitHub/TriggerDeploy')
 
-      if (Array.isArray(data)) {
+      if (data) {
         for (let i = 0; i < data.length; i++) {
           let installation = data[i]
           // authenticate as installation
           // https://github.com/octokit/app.js#authenticating-as-an-installation
-          logger.log(i)
           const token = await app.getInstallationAccessToken({
             installationId: installation.id
           })
