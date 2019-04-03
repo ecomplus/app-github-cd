@@ -30,6 +30,9 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
     }, 1000)
   })
 
+  // import trigger deploy async function
+  const triggerDeploy = require('./../lib/GitHub/TriggerDeploy')
+
   const scheduledDeploy = () => {
     logger.log('--> Scheduled deploy')
     // list all GitHub app installations from API
@@ -40,52 +43,47 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
     // chached authentication token
     const jwt = app.getSignedJsonWebToken()
 
-    // https://developer.github.com/v3/apps/#find-installations
-    request('GET /app/installations', {
-      headers: {
-        authorization: `Bearer ${jwt}`,
-        accept: 'application/vnd.github.machine-man-preview+json'
-      }
-    }).then(({ data }) => {
+    ;(async function listInstallations () {
+      // https://developer.github.com/v3/apps/#find-installations
+      const { data } = await request('GET /app/installations', {
+        headers: {
+          authorization: `Bearer ${jwt}`,
+          accept: 'application/vnd.github.machine-man-preview+json'
+        }
+      })
       logger.log(data)
+
       if (data) {
-        logger.log(1)
-        // import trigger deploy async function
-        const triggerDeploy = require('./../lib/GitHub/TriggerDeploy')
-        logger.log(2)
-
-        ;(async function loop () {
-          for (let i = 0; i < data.length; i++) {
-            let installation = data[i]
-            // authenticate as installation
-            // https://github.com/octokit/app.js#authenticating-as-an-installation
-            logger.log(installation)
-            const token = await app.getInstallationAccessToken({
-              installationId: installation.id
-            })
-            logger.log(token)
-            // then list installation repositories
-            // https://developer.github.com/v3/apps/installations/#list-repositories
-            const res = await request('GET /installation/repositories', {
-              headers: {
-                authorization: `token ${token}`,
-                accept: 'application/vnd.github.machine-man-preview+json'
-              }
-            })
-
-            // trigger deploy for each repository
-            let repos = res.data.repositories
-            logger.log(repos)
-            for (let i = 0; i < repos.length; i++) {
-              let owner = repos[i].owner.login
-              let repo = repos[i].name
-              let content = null
-              await triggerDeploy(installation, owner, repo, content, token)
+        for (let i = 0; i < data.length; i++) {
+          let installation = data[i]
+          // authenticate as installation
+          // https://github.com/octokit/app.js#authenticating-as-an-installation
+          logger.log(installation)
+          const token = await app.getInstallationAccessToken({
+            installationId: installation.id
+          })
+          logger.log(token)
+          // then list installation repositories
+          // https://developer.github.com/v3/apps/installations/#list-repositories
+          const res = await request('GET /installation/repositories', {
+            headers: {
+              authorization: `token ${token}`,
+              accept: 'application/vnd.github.machine-man-preview+json'
             }
+          })
+
+          // trigger deploy for each repository
+          let repos = res.data.repositories
+          logger.log(repos)
+          for (let i = 0; i < repos.length; i++) {
+            let owner = repos[i].owner.login
+            let repo = repos[i].name
+            let content = null
+            await triggerDeploy(installation, owner, repo, content, token)
           }
-        }())
+        }
       }
-    }).catch(err => logger.error(err))
+    }())
   }
 
   // debug
