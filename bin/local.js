@@ -93,5 +93,5 @@ if (process.env.SCHEDULED_DEPLOYS === 'true' || process.env.SCHEDULED_DEPLOYS ==
 
   // trigger deploy every day at 03:00
   // https://www.npmjs.com/package/node-schedule
-  require('node-schedule').scheduleJob('0 0 3 * *', scheduledDeploy)
+  require('node-schedule').scheduleJob('0 3 * * *', scheduledDeploy)
 }
