@@ -41,6 +41,9 @@ const POST = (id, meta, trigger, respond, storeId, appSdk) => {
         // return error code to receive webhook again further
         respond({}, null, 500, 'CD_ERR', err.code + ': ' + err.message)
       })
+    } else {
+      // undefined GitHub repo
+      respond({}, null, 400, 'NO_GITHUB_REPO')
     }
   })
 
