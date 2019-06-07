@@ -1,0 +1,15 @@
+{
+  "app_id": 9000,
+  "state": "active",
+  "title": "Storefront GitHub Deploy",
+  "slug": "github-cd",
+  "version": "0.5.1",
+  "type": "external",
+  "authentication": true,
+  "auth_callback_uri": "https://github.ecomplus.biz/api/v1/_callback.json",
+  "auth_scope": {
+    "procedures": [
+	    "POST"
+    ]
+  }
+}
