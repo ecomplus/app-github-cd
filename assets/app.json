@@ -9,7 +9,7 @@
   "auth_callback_uri": "https://github.ecomplus.biz/api/v1/_callback.json",
   "auth_scope": {
     "procedures": [
-	    "POST"
+      "POST"
     ]
   }
 }
