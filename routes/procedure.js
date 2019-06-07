@@ -3,7 +3,7 @@
 // import trigger deploy function
 const triggerDeploy = require('./../lib/GitHub/TriggerDeploy')
 // read configured E-Com Plus app data
-const getConfig = require('./../lib/Api/AppConfig')
+const getConfig = require('./../lib/Api/GetConfig')
 // GitHub App instance
 const app = require('./../lib/GitHub/App')
 // https://github.com/octokit/app.js#authenticating-as-an-app
