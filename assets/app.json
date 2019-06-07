@@ -11,5 +11,29 @@
     "procedures": [
       "POST"
     ]
+  },
+  "admin_settings": {
+    "owner": {
+      "schema": {
+        "title": "GitHub username",
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9-_]+$",
+        "examples": [
+          "myuser"
+        ],
+        "description": "GitHub username (slug) of the storefront repository owner"
+      }
+    },
+    "repo": {
+      "schema": {
+        "title": "GitHub repository name",
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9-_]+$",
+        "examples": [
+          "storefront"
+        ],
+        "description": "The name of storefront GitHub repo (without owner)"
+      }
+    }
   }
 }
