@@ -1,6 +1,6 @@
 {
   "name": "@ecomplus/app-github-cd",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Updates store GitHub repo after E-Com Plus procedures to trigger deploys",
   "main": "main.js",
   "private": true,
