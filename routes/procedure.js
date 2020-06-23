@@ -1,5 +1,7 @@
 'use strict'
 
+// log on files
+const logger = require('console-files')
 // import trigger deploy function
 const triggerDeploy = require('./../lib/GitHub/TriggerDeploy')
 // read configured E-Com Plus app data
@@ -20,6 +22,7 @@ const POST = (id, meta, trigger, respond, storeId, appSdk) => {
   // get repo and owner from E-Com Plus application data
   getConfig({ appSdk, storeId }).then(async ({ owner, repo }) => {
     if (owner && repo) {
+      logger.log('Procedure for:', { storeId, owner, repo })
       // cached authentication token
       const jwt = app.getSignedJsonWebToken()
       // get installation object for current owner/repo
@@ -48,7 +51,8 @@ const POST = (id, meta, trigger, respond, storeId, appSdk) => {
   })
 
     .catch(err => {
-      // cannot readt app data
+      logger.log(`Ignoreing procedure for #${storeId}`)
+      // cannot read app data
       // return error status code
       respond({}, null, 500, 'APP_ERR', err.message)
     })
