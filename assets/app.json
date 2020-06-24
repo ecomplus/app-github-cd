@@ -3,7 +3,7 @@
   "state": "active",
   "title": "Storefront GitHub Deploy",
   "slug": "github-cd",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "type": "external",
   "authentication": true,
   "auth_callback_uri": "https://github.ecomplus.biz/api/v1/_callback.json",
