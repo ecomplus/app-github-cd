@@ -22,7 +22,8 @@
           "myuser"
         ],
         "description": "GitHub username (slug) of the storefront repository owner"
-      }
+      },
+      "hide": false
     },
     "repo": {
       "schema": {
@@ -33,7 +34,8 @@
           "storefront"
         ],
         "description": "The name of storefront GitHub repo (without owner)"
-      }
+      },
+      "hide": false
     }
   }
 }
