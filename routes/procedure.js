@@ -22,7 +22,6 @@ const POST = (id, meta, trigger, respond, storeId, appSdk) => {
   // get repo and owner from E-Com Plus application data
   getConfig({ appSdk, storeId }).then(async ({ owner, repo }) => {
     if (owner && repo) {
-      logger.log('Procedure for:', { storeId, owner, repo })
       // cached authentication token
       const jwt = app.getSignedJsonWebToken()
       // get installation object for current owner/repo
@@ -37,6 +36,7 @@ const POST = (id, meta, trigger, respond, storeId, appSdk) => {
       })
 
       // try to trigger deploy and end HTTP request
+      logger.log(`Trigger deploy for #${storeId}`)
       triggerDeploy(data, owner, repo, content).then(() => {
         // end current request with success
         respond('CD_SUCCESS')
@@ -46,12 +46,12 @@ const POST = (id, meta, trigger, respond, storeId, appSdk) => {
       })
     } else {
       // undefined GitHub repo
+      logger.log(`No GitHub repo for #${storeId}`)
       respond({}, null, 400, 'NO_GITHUB_REPO')
     }
   })
 
     .catch(err => {
-      logger.log(`Ignoreing procedure for #${storeId}`)
       // cannot read app data
       // return error status code
       respond({}, null, 500, 'APP_ERR', err.message)
