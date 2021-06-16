@@ -21,7 +21,8 @@
         "examples": [
           "myuser"
         ],
-        "description": "GitHub username (slug) of the storefront repository owner"
+        "description": "GitHub username (slug) of the storefront repository owner",
+        "default": "ecomplus-stores"
       },
       "hide": false
     },
