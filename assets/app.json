@@ -33,7 +33,7 @@
         "examples": [
           "storefront"
         ],
-        "description": "The name of storefront GitHub repo (without owner)"
+        "description": "The name of storefront GitHub repo (without owner), usualy ecomplus-stores"
       },
       "hide": false
     }
